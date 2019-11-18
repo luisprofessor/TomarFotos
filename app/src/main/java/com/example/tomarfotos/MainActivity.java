@@ -27,6 +27,8 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import static android.Manifest.permission.CAMERA;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView imagen1;
     private EditText et1;
@@ -79,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if((checkSelfPermission(CAMERA_SERVICE)== PackageManager.PERMISSION_GRANTED)){
+        if((checkSelfPermission(CAMERA)== PackageManager.PERMISSION_GRANTED)){
             return true;
         }
 
-        if((shouldShowRequestPermissionRationale(CAMERA_SERVICE))){
+        if((shouldShowRequestPermissionRationale(CAMERA))){
             cargarDialogoRecomendacion();
         }else{
-            requestPermissions(new String[]{CAMERA_SERVICE},100);
+            requestPermissions(new String[]{CAMERA},100);
         }
 
         return false;
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                requestPermissions(new String[]{CAMERA_SERVICE},100);
+                requestPermissions(new String[]{CAMERA},100);
             }
         });
         dialogo.show();
